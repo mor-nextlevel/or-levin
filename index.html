@@ -4,34 +4,495 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>אור לוין</title>
+<title>HOME-MADE | אור לוין, גרציה בית מלאכה</title>
+<script src="/pixel.js?v=1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sam.css?v=1">
 <style>
-  :root { --ink: #16131c; --soft: #6d6878; --line: #e9e6ee; --accent: #d946a6; --bg: #fbfaf8; }
-  * { box-sizing: border-box; margin: 0; }
-  body {
-    min-height: 100svh; display: grid; place-items: center; padding: 24px 16px;
-    background: var(--bg); color: var(--ink);
-    font-family: "Heebo", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
-  }
-  main { width: 100%; max-width: 520px; text-align: center; }
-  .tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 500; color: var(--soft);
-    padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff;
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  h1 { font-size: clamp(34px, 8vw, 52px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin: 22px 0 14px; }
-  p { font-size: 18px; line-height: 1.6; color: var(--soft); text-wrap: balance; }
+/* =====================================================================
+   Or Levin page: the samurai look (sam.css) + the cards and touches of skill 1.
+   Image slots marked <!--slot:...--> are filled by ../build.py from the lab (lab.html).
+   ===================================================================== */
+.eyebrow{font-weight:500}
+/* hero: everything centered, a collage of homes in place of the portrait */
+.hero__main{flex-direction:column;flex-wrap:nowrap;align-items:center;gap:0;text-align:center;padding-bottom:30px}
+.hero__text{flex:none;width:100%;max-width:1140px}
+.h1{font-size:clamp(30px,3.3vw,48px);line-height:1.16}
+.hero__sub{margin-left:auto;margin-right:auto;max-width:640px}
+.fan{--cw:clamp(170px,25vw,340px);display:flex;justify-content:center;align-items:center;margin:56px auto 0;padding-bottom:34px;direction:ltr}
+.fan figure{position:relative;flex:none;margin:0 calc(var(--cw)*-.1);width:calc(var(--cw)*(1 - var(--a)*.16));aspect-ratio:4/5;border-radius:28px;overflow:hidden;rotate:calc(var(--d)*6deg);translate:0 calc(var(--a)*30px);z-index:calc(10 - var(--a)*2);box-shadow:0 40px 80px -34px rgb(0 0 0 / .9),0 0 0 1px rgb(255 255 255 / .07)}
+.fan img{display:block;width:100%;height:100%;object-fit:cover}
+/* the double slider of cut-out pieces (the Createli brands wall), no background behind the pieces */
+.cwall{order:2;position:relative;z-index:2;margin:0 -24px;overflow:hidden;direction:ltr;padding:30px 0 70px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.cwall__in{display:grid;gap:22px;transform:rotate(-2.5deg) scale(1.05)}
+.cwall__row{overflow:visible;cursor:grab;touch-action:pan-y}
+.cwall__row.drag{cursor:grabbing}
+.cwall__track{display:flex;align-items:center;gap:clamp(20px,2.8vw,44px);width:max-content;will-change:transform}
+.cwall__track img{height:clamp(170px,19vw,300px);width:auto;max-width:none;flex:none;filter:drop-shadow(0 22px 24px rgb(0 0 0 / .55));-webkit-user-drag:none;user-select:none}
+/* the magazine wall: homes, no frames, every other one set lower */
+.bento{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:20px;margin:60px auto 0;max-width:1180px;align-items:start}
+.bento--1{--n:1;max-width:560px}.bento--2{--n:2;max-width:860px}.bento--3{--n:3}.bento--4{--n:4}.bento--5{--n:5}
+.bento figure{margin:0;border-radius:28px;overflow:hidden;box-shadow:0 34px 70px -34px rgb(46 31 22 / .6)}
+.bento--2 figure:nth-child(even),.bento--4 figure:nth-child(even),.bento--5 figure:nth-child(even),.bento--3 figure:nth-child(3n+2){margin-top:64px}
+.bento img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1.2s var(--ease)}
+.bento figure:hover img{transform:scale(1.04)}
+/* skill 1 cards: what you could create (photo card, title on glass) */
+.makes{margin:56px auto 0;max-width:1180px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.mk{position:relative;grid-column:span 2;margin:0;min-height:420px;border-radius:28px;overflow:hidden;border:1px solid rgb(231 168 107 / .25);box-shadow:0 40px 80px -40px rgb(0 0 0 / .9);isolation:isolate;transition:transform .4s var(--ease),border-color .4s}
+.mk--big{grid-column:span 3;min-height:520px}
+.mk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s var(--ease)}
+.mk::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 45%,rgb(28 19 14 / .9) 100%)}
+.mk:hover{transform:translateY(-6px);border-color:rgb(231 168 107 / .7)}
+.mk:hover img{transform:scale(1.05)}
+.mk__body{position:absolute;right:0;left:0;bottom:0;padding:26px 26px 28px;text-align:right}
+.mk h3{margin:0;font-size:clamp(23px,2.3vw,32px);line-height:1.2;font-weight:900;color:#fff}
+.mk h3.lt{font-weight:500}
+.punch{margin:70px auto 0;max-width:820px;text-align:center}
+.punch p{margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.45;color:rgb(255 255 255 / .86)}
+.punch .motto{margin-top:18px}
+/* the secret: a big italic quote, then a full collage of girls and what they made */
+.secret{margin:22px auto 0;max-width:1120px;font-size:clamp(26px,3.1vw,44px);line-height:1.18;font-weight:900;font-style:italic;color:var(--ink)}
+.prose{margin:40px auto 0;max-width:760px}
+.prose p{margin:0 0 18px;font-size:clamp(19px,1.8vw,22px);line-height:1.65;color:var(--t-body)}
+.prose p.lead{font-weight:800;color:var(--t-strong)}
+.kids{columns:4 220px;column-gap:16px;margin:36px auto 0;max-width:1180px}
+.kids figure{margin:0 0 16px;break-inside:avoid;border-radius:24px;overflow:hidden;box-shadow:0 26px 50px -30px rgb(46 31 22 / .55)}
+.kids img{display:block;width:100%;height:auto}
+/* placeholders that the copy still has open: shown, never filled by us */
+.todo{color:var(--sky);font-weight:700;background:rgb(231 168 107 / .14);text-decoration:underline dashed 1.5px;text-underline-offset:5px}
+.sec--light .todo,.sec--frost .todo{color:var(--blue)}
+/* about: a big portrait, no frame */
+.about-head{display:flex;flex-wrap:wrap;align-items:center;gap:50px}
+.about-head>*{flex:1 1 420px;min-width:0}
+.about-photo{position:relative;margin:0 auto;max-width:520px;width:100%}
+.about-photo::before{content:"";position:absolute;inset:10% -8% -6%;border-radius:50%;background:radial-gradient(closest-side,rgb(231 168 107 / .32),transparent);filter:blur(34px)}
+.about-photo img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:32px;box-shadow:0 50px 90px -40px rgb(0 0 0 / .9)}
+.role{margin:20px 0 0;font-size:clamp(21px,2vw,26px);line-height:1.45;font-weight:800;color:var(--ice-txt)}
+/* skill 1 thread: one cord runs down, each line of the story sits on a knot, with its photo */
+.thread{position:relative;margin:70px auto 0;max-width:1000px;padding:0;list-style:none}
+.thread::before{content:"";position:absolute;top:10px;bottom:10px;left:50%;width:2px;margin-left:-1px;background:repeating-linear-gradient(180deg,rgb(231 168 107 / .7) 0 8px,transparent 8px 16px)}
+.thread li{position:relative;display:flex;align-items:center;gap:70px;margin:0 0 56px}
+.thread li:nth-child(even){flex-direction:row-reverse}
+.thread li::before{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 6px rgb(231 168 107 / .18),var(--glow)}
+.thread__t{flex:1;margin:0;font-size:clamp(20px,2vw,25px);line-height:1.55;font-weight:500;color:#fff}
+.thread figure{flex:1;margin:0;display:flex;justify-content:center}
+.thread img{width:min(100%,380px);aspect-ratio:4/3;object-fit:cover;border-radius:24px;box-shadow:0 40px 70px -36px rgb(0 0 0 / .9)}
+.after-thread{margin:10px auto 0;max-width:780px;text-align:center}
+.after-thread p{margin:0 0 18px;font-size:clamp(19px,1.8vw,22px);line-height:1.65;color:rgb(255 255 255 / .8)}
+.after-thread b{font-weight:800;color:#fff;background:linear-gradient(180deg,transparent 60%,rgb(231 168 107 / .3) 60%,rgb(231 168 107 / .3) 92%,transparent 92%)}
+/* rows: photos and short looping clips together, no frames */
+.sec--light .rows__track img{border:0;box-shadow:0 20px 40px -24px rgb(46 31 22 / .55)}
+.rows__track video{height:270px;width:270px;object-fit:cover;border-radius:22px;flex:none;box-shadow:0 20px 40px -24px rgb(46 31 22 / .55);background:#000}
+.today{margin:70px auto 0;max-width:820px;text-align:center}
+.today p{margin:0 0 16px;font-size:clamp(20px,2vw,24px);line-height:1.6;color:var(--ink-2)}
+.today b{color:var(--ink);font-weight:800}
+.today .big{margin-top:34px;font-size:clamp(23px,2.6vw,33px);line-height:1.35;font-weight:900;color:var(--ink)}
+/* product reveal: Or in the screen, then the program mockup on its own */
+.screen--tall{max-width:560px}
+.screen--tall img{display:block;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+.reveal-name{margin:46px 0 0;font-size:clamp(56px,10vw,150px);line-height:.95;font-weight:900;letter-spacing:.01em;direction:ltr}
+.reveal-sub{margin:22px auto 0;max-width:820px;font-size:clamp(20px,2.2vw,28px);line-height:1.5;font-weight:700;font-style:italic;color:var(--ice-txt)}
+.preface{margin:60px 0 0;font-size:clamp(22px,2.3vw,30px);font-weight:700;color:#fff}
+.draw{max-width:1100px}
+/* modules: the service card holds the module mockup */
+.svc-card__art{flex-basis:48%}
+.svc-card__art img{width:94%}
+.svc-card h3{direction:rtl}
+.svc-card h3 .ltr{direction:ltr;unicode-bidi:isolate}
+.svc-card__body p b{font-weight:800;color:var(--ink);background:linear-gradient(180deg,transparent 60%,rgb(231 168 107 / .35) 60%,rgb(231 168 107 / .35) 92%,transparent 92%)}
+.svc-list{max-width:1100px}
+.inside-lead{margin:22px auto 0;max-width:820px;font-size:clamp(19px,1.8vw,22px);line-height:1.65;color:var(--ink-2)}
+.inside-lead b{display:block;margin-bottom:6px;font-size:clamp(22px,2.3vw,28px);font-weight:900;color:var(--ink)}
+/* bonuses: skill 1 bonus cards with a phone mockup in the art panel */
+.feats{max-width:1200px;margin-left:auto;margin-right:auto}
+.feat{flex:1 1 340px;max-width:380px}
+.feat .art{height:360px;background-color:#B9482A;background-image:radial-gradient(55% 60% at 50% 58%,rgb(248 227 196 / .7) 0%,transparent 70%),linear-gradient(rgb(255 255 255 / .09) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / .09) 1px,transparent 1px)}
+.feat .art img{height:90%}
+.feat h3{direction:ltr;text-align:right;font-size:clamp(21px,2vw,26px)}
+.feat__body p b{font-weight:800;color:var(--ink)}
+/* the close */
+.close-photos{display:flex;justify-content:center;gap:18px;margin:60px auto 0;max-width:980px}
+.close-photos figure{margin:0;flex:1 1 0;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -30px rgb(46 31 22 / .5)}
+.close-photos figure:nth-child(even){translate:0 -18px}
+.close-photos img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.gauge .tr{stroke:rgb(46 31 22 / .1)}
+.endline{margin:34px auto 0;max-width:820px;font-size:clamp(21px,2.2vw,28px);line-height:1.5;font-weight:800;color:var(--ink)}
+.sec--light{background-color:var(--paper)}
+/* the offer, the questions and the form */
+.rowsheet .row span:first-child{min-width:0}
+.formcard .note.pre{margin:4px 0 0;font-size:17px;color:rgb(255 255 255 / .78)}
+.sec--frost .qa{background:#fff;border-color:rgb(46 31 22 / .08);box-shadow:0 18px 40px -30px rgb(46 31 22 / .45)}
+.sec--frost .qa:hover{border-color:rgb(196 87 46 / .35)}
+.sec--frost .qa.open{background:#fff;border-color:rgb(196 87 46 / .45);box-shadow:0 26px 60px -30px rgb(196 87 46 / .55)}
+.sec--frost .qa__btn{color:var(--ink)}
+.sec--frost .qa__n{background:rgb(196 87 46 / .08);border-color:rgb(196 87 46 / .25);color:var(--blue)}
+.sec--frost .qa.open .qa__n{color:#fff}
+.sec--frost .qa__x{border-color:rgb(46 31 22 / .2)}
+.sec--frost .qa__x::before,.sec--frost .qa__x::after{background:var(--ink)}
+.sec--frost .qa.open .qa__x{background:rgb(196 87 46 / .12)}
+.sec--frost .qa__p p{color:var(--ink-2)}
+.faq-side img{width:min(250px,72%);filter:drop-shadow(0 26px 30px rgb(46 31 22 / .35))}
+.final .saying{margin-bottom:8px}
+@media (max-width:760px){
+  .fan{--cw:42vw;margin-top:40px;padding-bottom:20px}
+  .fan figure{margin:0 calc(var(--cw)*-.16);border-radius:20px}
+  .fan figure[data-a="2"],.fan figure[data-a="3"],.fan figure[data-a="4"]{display:none}
+  .cwall{padding:18px 0 46px}
+  .cwall__in{gap:14px}
+  .cwall__track img{height:160px}
+  .bento,.bento--1,.bento--2{grid-template-columns:1fr 1fr;gap:12px;margin-top:44px;max-width:none}
+  .bento figure{border-radius:20px}
+  .bento figure:nth-child(n){margin-top:0}
+  .bento figure:nth-child(even){margin-top:32px}
+  .makes{grid-template-columns:1fr;gap:16px}
+  .mk,.mk--big{grid-column:auto;min-height:400px}
+  .mk__body{padding:20px 20px 22px}
+  .kids{columns:3;column-gap:8px}
+  .kids figure{margin-bottom:8px;border-radius:14px}
+  .about-photo img{border-radius:26px}
+  .thread{margin-top:50px}
+  .thread li,.thread li:nth-child(even){flex-direction:column;align-items:stretch;gap:20px;padding-right:0;padding-left:0;margin-bottom:44px}
+  .thread li::before,.thread::before{display:none}
+  .thread img{width:100%}
+  .rows__track video{height:190px;width:190px;border-radius:18px}
+  .feat .art{height:320px}
+  .close-photos{gap:8px}
+  .close-photos figure{border-radius:14px}
+  .close-photos figure:nth-child(even){translate:0 -10px}
+  .faq-side img{width:190px}
+}
 </style>
 </head>
 <body>
-  <main>
-    <span class="tag"><span class="dot"></span>נקסט לבל</span>
-    <h1>המרחב של אור לוין</h1>
-    <p>כאן ייבנה הדף הראשון.<br>כל שינוי שאחד מאיתנו שומר עולה לכאן תוך דקה.</p>
-  </main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="gq" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDB27A"/><stop offset="1" stop-color="#B9482A"/></linearGradient>
+  <linearGradient id="gGauge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8E3C4"/><stop offset=".5" stop-color="#E39A5C"/><stop offset="1" stop-color="#B9482A"/></linearGradient>
+</defs></svg>
+<main>
+
+<!-- ============ 1 · HERO: centered, a collage of homes, the double slider of pieces ============ -->
+<section class="hero" id="s-hero">
+  <div class="aura aura--a" aria-hidden="true"></div>
+  <div class="cwall" aria-hidden="true" data-bleed><!--slot:slider--><div class="cwall__in"><div class="cwall__row" data-film="1" data-bleed><div class="cwall__track"><img src="assets/cut-01.webp" alt="" width="164" height="640"><img src="assets/cut-03.webp" alt="" width="447" height="640"><img src="assets/cut-05.webp" alt="" width="599" height="640"><img src="assets/cut-07.webp" alt="" width="512" height="640"><img src="assets/cut-10.webp" alt="" width="513" height="640"><img src="assets/cut-13.webp" alt="" width="531" height="640"><img src="assets/cut-18.webp" alt="" width="512" height="640"><img src="assets/cut-21.webp" alt="" width="469" height="640"><img src="assets/cut-23.webp" alt="" width="535" height="640"></div></div><div class="cwall__row" data-film="-1" data-bleed><div class="cwall__track"><img src="assets/cut-02.webp" alt="" width="394" height="640"><img src="assets/cut-04.webp" alt="" width="308" height="640"><img src="assets/cut-06.webp" alt="" width="523" height="640"><img src="assets/cut-08.webp" alt="" width="526" height="640"><img src="assets/cut-11.webp" alt="" width="409" height="640"><img src="assets/cut-16.webp" alt="" width="470" height="640"><img src="assets/cut-20.webp" alt="" width="568" height="640"><img src="assets/cut-22.webp" alt="" width="640" height="543"></div></div></div><!--/slot:slider--></div>
+  <div class="hero__main">
+    <div class="hero__text">
+      <p class="eyebrow"><span class="eyebrow__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span>״כל מי שנכנסת אליי הביתה אומרת לי שזה הבית הכי מיוחד שהיא ראתה״</span></p>
+      <h1 class="h1">איך כל אחת יכולה להפוך את הבית <br class="d">שלה לשיקי, מעוצב ומלא באופי עם <span class="nw">יצירות מקרמה</span><br class="d"> <span class="grad-l">שנראות כמו פריטי מעצבים שעולים <br class="d">אלפי ועשרות אלפי שקלים</span></h1>
+      <p class="hero__sub">ולעשות את זה מהבית שלך, בקצב שלך<br>גם אם אין לך שום ניסיון, לא נגעת במקרמה מעולם<br>וגם אם זאת המלאכה הראשונה שאת עושה אי פעם.</p>
+    </div>
+    <div class="fan reveal" data-bleed><!--slot:hero--><figure style="--d:-1;--a:1" data-a="1"><img src="assets/h-03.webp" alt="" width="1100" height="1375"></figure><figure style="--d:0;--a:0" data-a="0"><img src="assets/h-01.webp" alt="" width="1100" height="1375" fetchpriority="high"></figure><figure style="--d:1;--a:1" data-a="1"><img src="assets/h-02.webp" alt="" width="1100" height="1375"></figure><!--/slot:hero--></div>
+  </div>
+</section>
+
+<!-- ============ 2 · THE MAGAZINE WALL (light) ============ -->
+<section class="sec sec--light" id="s-wall">
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span>
+    <h2 class="h2 h2--md reveal">מה אם הבית שלך היה נראה כאילו<br><span class="line2 grad">יצא ממגזין עיצוב והכל היה מהידיים שלך<span class="pt">?</span></span></h2>
+    <div class="reveal" data-d="1"><!--slot:wall--><div class="bento bento--4" data-bleed><figure><img src="assets/h-07.webp" alt="" width="1100" height="1375" loading="lazy"></figure><figure><img src="assets/h-11.webp" alt="" width="1100" height="1375" loading="lazy"></figure><figure><img src="assets/h-05.webp" alt="" width="1100" height="1375" loading="lazy"></figure><figure><img src="assets/h-12.webp" alt="" width="1100" height="1375" loading="lazy"></figure></div><!--/slot:wall--></div>
+  </div>
+</section>
+
+<!-- ============ 3 · WHAT YOU COULD CREATE (dark) ============ -->
+<section class="sec sec--deep" id="s-create">
+  <div class="gridfx" aria-hidden="true"></div>
+  <div class="aura aura--b" aria-hidden="true"></div>
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6L20 9.3l-4 4 1 5.7-5-2.8-5 2.8 1-5.7-4-4 5.4-.7z"/></svg></span>
+    <h2 class="h2 reveal">מה אם היית יכולה ליצור</h2>
+    <div class="makes">
+      <div class="mk mk--big reveal"><!--slot:create-1--><img src="assets/h-08.webp" alt="" width="1100" height="1375" loading="lazy"><!--/slot:create-1--><div class="mk__body"><h3>מקרמה שנראה כמו פריט מעצבים</h3></div></div>
+      <div class="mk mk--big reveal" data-d="1"><!--slot:create-2--><img src="assets/h-06.webp" alt="" width="1100" height="1375" loading="lazy"><!--/slot:create-2--><div class="mk__body"><h3>מראה שהופכת קיר שלם לוואו</h3></div></div>
+      <div class="mk reveal"><!--slot:create-3--><img src="assets/h-09.webp" alt="" width="1100" height="1375" loading="lazy"><!--/slot:create-3--><div class="mk__body"><h3>פינה ירוקה שנראית כמו קטלוג</h3></div></div>
+      <div class="mk reveal" data-d="1"><!--slot:create-4--><img src="assets/h-04.webp" alt="" width="1100" height="1375" loading="lazy"><!--/slot:create-4--><div class="mk__body"><h3 class="lt">מראות מעוצבות בצורה מרהיבה</h3></div></div>
+      <div class="mk reveal" data-d="2"><!--slot:create-5--><img src="assets/h-10.webp" alt="" width="1100" height="1375" loading="lazy"><!--/slot:create-5--><div class="mk__body"><h3 class="lt">או שרשרת דגלוני בוהו שהופכת  קיר פשוט לפינה מעוצבת</h3></div></div>
+    </div>
+    <div class="punch">
+      <p class="reveal">נראה כמו משהו שרק אמניות מוכשרות יודעות לעשות, נכון?</p>
+      <p class="motto grad-l reveal">אז זהו, שלא!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · THE SECRET (light) ============ -->
+<section class="sec sec--frost" id="s-secret">
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0"/></svg></span>
+    <p class="secret reveal">הסוד של מקרמה<br><span class="grad">הוא שמאחורי היצירות הכי מרשימות מסתתרים <br class="d">כמה קשרים פשוטים שכל אחת יכולה ללמוד.</span></p>
+    <div class="prose">
+      <p class="lead reveal">כן, אפילו ילדות מצליחות ליצור פריטים מדהימים.</p>
+    </div>
+    <div class="kids reveal" data-bleed><!--slot:secret--><figure><img src="assets/a-04_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-28_1327.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-22_1337.webp" alt="" width="1000" height="750" loading="lazy"></figure><figure><img src="assets/a-39_1328.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-10_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-21_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-01_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-18_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-42_1328.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-29_1327.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-03_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-20_1327.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-24_1327.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-50_1328.webp" alt="" width="1000" height="750" loading="lazy"></figure><figure><img src="assets/a-54_1328.webp" alt="" width="750" height="1000" loading="lazy"></figure><figure><img src="assets/a-08_1337.webp" alt="" width="750" height="1000" loading="lazy"></figure><!--/slot:secret--></div>
+    <div class="prose" style="margin-top:56px">
+      <p class="reveal">ולא צריך כישרון מיוחד, ניסיון קודם או ידיים של אמנית.</p>
+      <p class="reveal">את רק לדעת מאיפה להתחיל, ללמוד את הקשרים<br class="d"> הנכונים ולגלות איך משלבים ביניהם.</p>
+      <p class="lead reveal">וברגע שתדעי את הסודות האלה תגלי<br class="d"> שאת יכולה ליצור יותר ממה שאי פעם דמיינת.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · ABOUT (dark): portrait, then the thread of her story ============ -->
+<section class="sec sec--deep" id="s-about">
+  <div class="gridfx" aria-hidden="true"></div>
+  <div class="aura aura--a" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="about-head">
+      <div>
+        <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg></span>
+        <h2 class="h2 h2--md reveal">נעים להכיר, <span class="grad-l">אני אור לוין</span></h2>
+        <p class="role reveal" data-d="1">בעלת גרציה | בית מלאכה, יוצרת<br>ומפתחת תוכניות במלאכות יד.</p>
+      </div>
+      <figure class="about-photo reveal" data-d="1"><img src="assets/or-22.webp" alt="אור לוין" width="799" height="1200" loading="lazy"></figure>
+    </div>
+    <ol class="thread">
+      <li class="reveal"><p class="thread__t">במשך כ־15 שנה ניהלתי את <span class="nw">עמותת <span class="todo">(שם העמותה)</span></span> <span class="nw">ש<span class="todo">[מה היא עשתה]</span></span></p><figure><img src="assets/a-22_1337.webp" alt="" width="1000" height="750" loading="lazy"></figure></li>
+      <li class="reveal"><p class="thread__t">במהלך השנים האלה בניתי תוכניות <span class="nw">של <span class="todo">[אילו תכניות]</span></span></p><figure><img src="assets/a-23_1327.webp" alt="" width="1000" height="750" loading="lazy"></figure></li>
+      <li class="reveal"><p class="thread__t">הובלתי צוותים <span class="nw">של <span class="todo">[אילו צוותים]</span></span></p><figure><img src="assets/w-13.webp" alt="" width="1000" height="750" loading="lazy"></figure></li>
+      <li class="reveal"><p class="thread__t">והעברתי הרצאות הדרכות וסדנאות לעבודה<br> עם אנשים חינוך,הורים וילדים.</p><figure><img src="assets/w-10.webp" alt="" width="1000" height="750" loading="lazy"></figure></li>
+    </ol>
+    <div class="after-thread">
+      <p class="reveal">בשנים האחרונות חיברתי את כל הניסיון<br class="d"> הזה לעולם שאני אוהבת במיוחד <b>מלאכות היד</b>.</p>
+      <p class="reveal">מאז פיתחתי והעברתי סדנאות ותוכניות במקרמה, סריגה, רקמה ומלאכות נוספות לנשים, ילדים, בני נוער וצוותים מקצועיים; בבתי ספר במסגרת גפ״ן, במרכזי חוסן, ברשויות, בקהילות ובארגונים.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · THE MOVING GALLERY + TODAY (light) ============ -->
+<section class="sec sec--light" id="s-today" style="padding-left:0;padding-right:0">
+  <div class="rows" style="margin-top:0"><!--slot:today--><div class="rows__row" data-film="1" data-bleed><div class="rows__track"><img src="assets/w-13.webp" alt="" width="1000" height="666" loading="lazy"><video data-src="assets/v-20.mp4" poster="assets/v-poster.jpg" muted loop playsinline preload="none" width="270" height="270"></video><img src="assets/a-23_1327.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-18.webp" alt="" width="666" height="1000" loading="lazy"><img src="assets/a-25_1327.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-29.webp" alt="" width="1000" height="666" loading="lazy"><img src="assets/a-27_1327.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-07.webp" alt="" width="1000" height="666" loading="lazy"><video data-src="assets/v-95.mp4" poster="assets/v-poster.jpg" muted loop playsinline preload="none" width="270" height="270"></video><img src="assets/a-36_1327.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-31.webp" alt="" width="1000" height="666" loading="lazy"><img src="assets/a-52_1328.webp" alt="" width="750" height="1000" loading="lazy"></div></div><div class="rows__row" data-film="-1" data-bleed><div class="rows__track"><img src="assets/a-31_1338.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-16.webp" alt="" width="666" height="1000" loading="lazy"><img src="assets/a-16_1337.webp" alt="" width="750" height="1000" loading="lazy"><video data-src="assets/v-172.mp4" poster="assets/v-poster.jpg" muted loop playsinline preload="none" width="270" height="270"></video><img src="assets/w-20.webp" alt="" width="1000" height="666" loading="lazy"><img src="assets/a-46_1328.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-24.webp" alt="" width="666" height="1000" loading="lazy"><img src="assets/a-33_1338.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-27.webp" alt="" width="1000" height="666" loading="lazy"><img src="assets/a-45_1328.webp" alt="" width="750" height="1000" loading="lazy"><img src="assets/w-11.webp" alt="" width="1000" height="666" loading="lazy"></div></div><!--/slot:today--></div>
+  <div class="wrap pad">
+    <div class="today">
+      <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg></span>
+      <p class="reveal" style="margin-top:22px">היום, ב־<b>גרציה | בית מלאכה</b>,<br>אני עושה בדיוק את מה שאני הכי טובה בו:<br>לוקחת מלאכה שנראית מורכבת, מפרקת אותה לשלבים ברורים<br class="d"> ומלמדת אותה כך שגם מי שמתחילה מאפס יכולה להגיע לתוצאה מרשימה ומקצועית.</p>
+      <p class="big reveal">הקורס הזה נבנה מתוך כל הניסיון הזה<br><span class="grad">לא רק ביצירה, אלא בלדעת איך להנגיש אותה ולהפוך אותה לקלה לביצוע.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · BELIEF + THE PRODUCT DRAWN OUT (dark katana) ============ -->
+<section class="sec sec--katana" id="s-product">
+  <div class="gridfx" aria-hidden="true"></div>
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>
+    <div class="flow">
+      <p class="first reveal">אני מאמינה שבית יפה הוא כל כך חשוב.<br>ובית יפה לא אומר פריטים יקרים.</p>
+      <p class="gap reveal">דברים יפים משמחים אותנו באופן עמוק.<br class="d"> פינה שנראית בדיוק כמו שרצינו, קיר שמרגיש פתאום שלם,<br class="d"> פריט אחד שמכניס לחלל אופי -כל אלה משפיעים על איך שאנחנו מרגישות בבית שלנו.</p>
+    </div>
+    <figure class="screen screen--tall reveal"><div class="screen__bar" aria-hidden="true"><i></i><i></i><i></i></div><!--slot:space--><img src="assets/w-21.webp" alt="אור לוין" width="666" height="1000" loading="lazy"><!--/slot:space--></figure>
+    <h3 class="motto grad-l reveal" style="font-size:clamp(32px,4.6vw,64px)">ויש משהו מיוחד עוד יותר כשזה<br>פריט שאנחנו <span class="nw">יצרנו בעצמנו.</span></h3>
+    <div class="flow">
+      <p class="gap reveal">אין תחליף לתחושת הסיפוק הזאת -לראות משהו יפה,<br class="d"> מדויק ומעוצב, ולדעת שהוא נוצר בידיים שלך.</p>
+      <p class="gap reveal">מתוך האהבה הזו לעיצוב, לאסתטיקה, ליופי ולתחושת ההצלחה שביצירה -יצרתי<br class="d"> את התכנית הראשונה בישראל שמראה לך איך לעצב את הבית<br class="d"> בקלות ובפשטות גם את מתחילה לגמרי.</p>
+    </div>
+    <p class="preface reveal">אני מתרגשת להציג בפנייך את:</p>
+    <h2 class="reveal-name grad-l reveal">HOME-MADE</h2>
+    <p class="reveal-sub reveal">תכנית דיגיטלית שתראה לך איך להפוך את הבית שלך לבית<br class="d"> שנראה כאילו יצא ממגזין עיצוב, עם פריטי מקרמה מרהיבים<br class="d"> שנראים כמו פריטי מעצבים, אבל נוצרו במו ידייך</p>
+    <div class="draw reveal">
+      <figure class="draw__obj"><img src="assets/m-program.webp" alt="HOME-MADE" width="1800" height="1009" loading="lazy"></figure>
+      <span class="draw__beam" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · WHAT IS INSIDE (light): five module cards, a mockup each ============ -->
+<section class="sec sec--light" id="s-inside">
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M10 8.5v5l4-2.5z"/></svg></span>
+    <h2 class="h2 reveal">מה מחכה לך בפנים<span class="pt">?</span></h2>
+    <p class="inside-lead reveal"><b>KNOT BASIC הוא לא אוסף של סרטונים על קשרים.</b> זה קורס שבנוי צעד־אחר־צעד כדי לקחת אותך מהחוט הראשון ועד לפריטי מקרמה מעוצבים, מוקפדים ומלאי נוכחות — כאלה שבאמת תרצי לראות בבית שלך.</p>
+    <div class="svc-list">
+      <article class="svc-card reveal">
+        <div class="svc-card__body">
+          <h3>1. הבסיס שעושה את כל ההבדל</h3>
+          <p>נלמד את היסודות שעושים את כל ההבדל בתוצאה.</p>
+          <p>תכירי את סוגי החוטים, כלי העבודה, שיטות המדידה והחיתוך, ותלמדי את קשרי הבסיס שעליהם בנוי כמעט כל עולם המקרמה.</p>
+          <p>אבל לא פחות חשוב: תלמדי כבר מההתחלה <b>איך לעבוד נקי, מדויק ואחיד</b>, כדי שהתוצאה לא תיראה כמו ״ניסיון ראשון״.</p>
+        </div>
+        <div class="svc-card__art"><span class="svc-card__ring" aria-hidden="true"></span><img src="assets/m-module-1.webp" alt="" width="1400" height="705" loading="lazy"></div>
+      </article>
+      <article class="svc-card reveal">
+        <div class="svc-card__body">
+          <h3>2. קיר עם אופי</h3>
+          <p>מכאן מתחילים לשחק באמת.</p>
+          <p>נלמד להפוך קשרים פשוטים לעלים, נוצות ואלמנטים מעוצבים, לעבוד עם ענפים וחומרים טבעיים ולבנות מהם קומפוזיציות שנראות כאילו הגיעו מחנות עיצוב.</p>
+          <p>בסוף החלק הזה כבר תתחילי להסתכל אחרת על כל קיר ריק בבית.</p>
+        </div>
+        <div class="svc-card__art"><span class="svc-card__ring" aria-hidden="true"></span><img src="assets/m-module-2.webp" alt="" width="1400" height="705" loading="lazy"></div>
+      </article>
+      <article class="svc-card reveal">
+        <div class="svc-card__body">
+          <h3>3. הפינה הירוקה</h3>
+          <p>ניצור פריטי מקרמה לצמחייה ונלמד איך לקחת עציץ פשוט ולהפוך אותו לחלק מהעיצוב.</p>
+          <p>איך לבחור פרופורציות, אורך וסגנון, ואיך ליצור <b>פינה ירוקה עם נוכחות</b> — כזו שמרימה את כל החלל.</p>
+        </div>
+        <div class="svc-card__art"><span class="svc-card__ring" aria-hidden="true"></span><img src="assets/m-module-3.webp" alt="" width="1400" height="705" loading="lazy"></div>
+      </article>
+      <article class="svc-card reveal">
+        <div class="svc-card__body">
+          <h3><span class="ltr">4. Mirror, Mirror</span></h3>
+          <p>מראה פשוטה הופכת כאן לפריט שמגדיר את כל הקיר.</p>
+          <p>נלמד ליצור מראות מקרמה מעוצבות, לעבוד בצורה מעגלית, לשמור על סימטריה ולבנות מסגרת שנראית עשירה, מדויקת ומקצועית.</p>
+          <p>לא עוד מראה על הקיר.<br><b>פריט שהוא כל הקיר.</b></p>
+        </div>
+        <div class="svc-card__art"><span class="svc-card__ring" aria-hidden="true"></span><img src="assets/m-module-4.webp" alt="" width="1400" height="705" loading="lazy"></div>
+      </article>
+      <article class="svc-card reveal">
+        <div class="svc-card__body">
+          <h3><span class="ltr">5. The Statement Piece</span></h3>
+          <p>עכשיו, כשכבר יש לך את הטכניקה בידיים, מגיע הזמן ללכת בגדול.</p>
+          <p>נלמד ליצור פריט מקרמה משמעותי ומרשים -כזה שיכול להחזיק פינה, קיר או חלל שלם - ונחבר יחד את כל מה שלמדת: תכנון, מידות, קשרים, טקסטורה וגימור.</p>
+          <p>זה השלב שבו את כבר לא רק עוקבת אחרי הדרכה.<br><b>את מתחילה באמת להבין איך יוצרים במקרמה.</b></p>
+        </div>
+        <div class="svc-card__art"><span class="svc-card__ring" aria-hidden="true"></span><img src="assets/m-module-5.webp" alt="" width="1400" height="705" loading="lazy"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · BONUSES (dark navy): skill 1 bonus cards, a phone mockup each ============ -->
+<section class="sec sec--navy" id="s-bonus">
+  <div class="aura aura--a" aria-hidden="true"></div>
+  <div class="wrap center">
+    <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S10 8 12 8zm0 0c2-4 6-4 6-1.5S14 8 12 8z"/></svg></span>
+    <h2 class="h2 reveal">ויש גם בונוסים</h2>
+    <div class="feats">
+      <article class="feat reveal"><div class="art"><img src="assets/m-bonus-1.webp" alt="" width="453" height="700" loading="lazy"></div><div class="feat__body"><h3>BONUS 01 — The Boho Edit</h3><p>פרויקט קצר וכיפי של <b>קישוט קיר בוהו</b> שנותן לקיר טאץ׳ מיידי — ומושלם גם כמתנה.</p></div></article>
+      <article class="feat reveal" data-d="1"><div class="art"><img src="assets/m-bonus-2.webp" alt="" width="453" height="700" loading="lazy"></div><div class="feat__body"><h3>BONUS 02 — Feather Collection</h3><p>נלמד כמה וריאציות של עלים ונוצות, איך לשנות גודל, צפיפות וצורה ואיך ליצור מהם קולקציה שלמה.</p></div></article>
+      <article class="feat reveal" data-d="2"><div class="art"><img src="assets/m-bonus-3.webp" alt="" width="453" height="700" loading="lazy"></div><div class="feat__body"><h3>BONUS 03 — Designer Finish</h3><p>הפרטים הקטנים שמפרידים בין ״עבודת יד״ לבין <b>פריט שנראה מקצועי</b>:<br>יישור, סירוק, גזירה, סימטריה, הסתרת קצוות והגימור שעושה את כל ההבדל.</p></div></article>
+      <article class="feat reveal"><div class="art"><img src="assets/m-bonus-4.webp" alt="" width="453" height="700" loading="lazy"></div><div class="feat__body"><h3>BONUS 04 — Make It Yours</h3><p>איך לקחת את הפרויקטים שלמדת ולשנות אותם כך שיתאימו <b>בדיוק לבית שלך</b> — מידה, צבע, סוג חוט, אורך וצפיפות.</p><p>כי המטרה היא לא שהבית שלך ייראה כמו הבית שלי.<br>המטרה היא שתדעי ליצור את מה שמתאים לשלך.</p></div></article>
+      <article class="feat reveal" data-d="1"><div class="art"><img src="assets/m-bonus-5.webp" alt="" width="453" height="700" loading="lazy"></div><div class="feat__body"><h3>BONUS 05 — Macramé Cheat Sheet</h3><p>מדריך שימושי להדפסה עם הקשרים, החומרים, כללי האצבע והמידע שתרצי שיהיה לידך בזמן העבודה — בלי לחפש בכל פעם מחדש בתוך הסרטונים.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · THE CLOSE (light) ============ -->
+<section class="sec sec--light" id="s-end">
+  <div class="wrap center">
+    <div class="gauge reveal" style="margin-top:0"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="tr" cx="100" cy="100" r="96"/><circle class="fl" cx="100" cy="100" r="96"/></svg><img src="assets/or-25.webp" alt="אור לוין" width="800" height="1200" loading="lazy" style="object-position:50% 22%"></div>
+    <h2 class="h2 h2--md reveal" style="margin-top:46px">בסוף הקורס לא יהיו לך רק כמה פריטים יפים בבית<span class="pt">.</span></h2>
+    <p class="endline reveal">תהיה לך היכולת להסתכל על פריט מקרמה, להבין איך הוא בנוי -<span class="grad">ולדעת שגם את יכולה ליצור משהו כזה.</span></p>
+    <div class="close-photos reveal" data-bleed>
+      <figure><img src="assets/p-06.webp" alt="" width="800" height="1000" loading="lazy"></figure>
+      <figure><img src="assets/p-07.webp" alt="" width="800" height="1000" loading="lazy"></figure>
+      <figure><img src="assets/p-20.webp" alt="" width="800" height="1000" loading="lazy"></figure>
+      <figure><img src="assets/p-16.webp" alt="" width="800" height="1000" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+<!-- ============ 11 · THE OFFER (dark): glass rows and the glass price card ============ -->
+<section class="sec sec--contact" id="s-offer">
+  <div class="aura aura--b" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13M12 8S10.5 3 8 3.6 8.3 8 12 8zM12 8s1.5-5 4-4.4S15.7 8 12 8z"/></svg></span>
+        <h2 class="h2 h2--md reveal">כל מה שאת מקבלת <span class="nw">בתוך <bdi class="grad-l">HOME-MADE</bdi></span></h2>
+        <p class="sub reveal" data-d="1">זה כל מה שנכנס לתכנית:</p>
+        <div class="rowsheet reveal">
+          <div class="row"><span>חמשת הפרקים, מהחוט הראשון ועד פריט שהוא כל הקיר</span><span>כלול</span></div>
+          <div class="row"><span>בונוס 1, <bdi>The Boho Edit</bdi></span><span>כלול</span></div>
+          <div class="row"><span>בונוס 2, <bdi>Feather Collection</bdi></span><span>כלול</span></div>
+          <div class="row"><span>בונוס 3, <bdi>Designer Finish</bdi></span><span>כלול</span></div>
+          <div class="row"><span>בונוס 4, <bdi>Make It Yours</bdi></span><span>כלול</span></div>
+          <div class="row"><span>בונוס 5, <bdi>Macramé Cheat Sheet</bdi></span><span>כלול</span></div>
+          <div class="row sum"><span>הכול ביחד</span><span>297 ש״ח</span></div>
+        </div>
+      </div>
+      <div class="formcard reveal">
+        <figure class="mock"><img src="assets/m-program.webp" alt="" width="1800" height="1009" loading="lazy"></figure>
+        <p class="note pre">פריט מעצבים אחד יכול לעלות אלפי שקלים. כל התכנית, עם <span class="nw">חמשת הבונוסים:</span></p>
+        <p class="price-only">רק</p>
+        <span class="price-now grad-l">297 ש״ח</span>
+        <a class="btn" href="#s-final">אני רוצה <span class="lock">להתחיל ליצור</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+        <img class="cards" src="assets/cards.png" alt="" width="1024" height="125" loading="lazy">
+        <p class="note">תשלום מאובטח בכרטיס אשראי.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · FAQ (light): icon squares, opens by itself while scrolling ============ -->
+<section class="sec sec--frost" id="s-faq">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-side">
+        <span class="ic reveal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.8M12 17.2v.1"/></svg></span>
+        <h2 class="h2 h2--md reveal">אור, <span class="nw">יש לי שאלה<span class="pt">..</span></span></h2>
+        <img class="reveal" src="assets/or-cut.webp" alt="אור לוין" width="777" height="1370" loading="lazy">
+      </div>
+      <div class="faq-list" data-faq data-autoopen>
+        <div class="qa open reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="true"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span><span class="qa__q">אף פעם לא עשיתי מקרמה. זה מתאים גם לי?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p>כן. התכנית נבנתה בדיוק בשבילך, מהחוט הראשון.</p><p>בפרק הראשון תכירי את סוגי החוטים, כלי העבודה וקשרי הבסיס שעליהם בנוי כמעט כל עולם המקרמה, ותלמדי כבר מההתחלה <span class="nw">לעבוד נקי ומדויק.</span></p></div></div>
+        </div>
+        <div class="qa reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="false"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10.5V5.5a1.5 1.5 0 0 1 3 0V12M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-2.7L3.6 14.6a1.6 1.6 0 0 1 2.5-2L7 13.5"/></svg></span><span class="qa__q">אני לא ממש מוכשרת בידיים. אני אצליח?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p>לא צריך כישרון מיוחד, ניסיון קודם או ידיים של אמנית.</p><p>מאחורי היצירות הכי מרשימות מסתתרים כמה קשרים פשוטים שכל אחת יכולה ללמוד. ואני מפרקת כל פריט לשלבים <span class="nw">ברורים, אחד אחרי השני.</span></p></div></div>
+        </div>
+        <div class="qa reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="false"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M10 8.5v5l4-2.5z"/></svg></span><span class="qa__q">איך זה עובד?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p><bdi>HOME-MADE</bdi> היא תכנית דיגיטלית. את לומדת מהבית שלך, בקצב שלך.</p><p>חמישה פרקים, מהבסיס ועד פריט מקרמה גדול שמחזיק קיר שלם, ועוד <span class="nw">חמישה בונוסים.</span></p></div></div>
+        </div>
+        <div class="qa reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="false"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><span class="qa__q">מה צריך כדי להתחיל?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p>בפרק הראשון תכירי את סוגי החוטים וכלי העבודה, כך שתדעי בדיוק עם מה מתחילים.</p><p>ובונוס <bdi>Macramé Cheat Sheet</bdi> מרכז לך את הקשרים, החומרים וכללי האצבע במקום אחד, <span class="nw">ליד העבודה.</span></p></div></div>
+        </div>
+        <div class="qa reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="false"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span class="qa__q">ואם הבית שלי בסגנון אחר?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p>בשביל זה יש את בונוס <bdi>Make It Yours</bdi>: איך לשנות כל פרויקט כך שיתאים בדיוק לבית שלך, במידה, בצבע, בסוג החוט, באורך ובצפיפות.</p><p>כי המטרה היא לא שהבית שלך ייראה כמו הבית שלי. המטרה היא שתדעי ליצור את מה <span class="nw">שמתאים לשלך.</span></p></div></div>
+        </div>
+        <div class="qa reveal">
+          <h3><button class="qa__btn" type="button" aria-expanded="false"><span class="qa__n" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2c-.5-.8-1.5-1.3-2.8-1.3-1.7 0-2.8.9-2.8 2.1 0 2.8 5.8 1.4 5.8 4.1 0 1.2-1.2 2.1-3 2.1-1.4 0-2.5-.6-3-1.4M12 6.2v1.7M12 16.3V18"/></svg></span><span class="qa__q">כמה זה עולה?</span><span class="qa__x" aria-hidden="true"></span></button></h3>
+          <div class="qa__p"><div><p>297 ש״ח, וזה כולל את חמשת הפרקים ואת <span class="nw">חמשת הבונוסים.</span></p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 · FINAL (dark): the glass card, the form, the heat goal ============ -->
+<section class="sec sec--deep" id="s-final">
+  <div class="gridfx" aria-hidden="true"></div>
+  <div class="aura aura--a" aria-hidden="true"></div>
+  <div class="wrap center">
+    <div class="formcard final reveal">
+      <figure class="mock"><img src="assets/m-program.webp" alt="" width="1800" height="1009" loading="lazy"></figure>
+      <img class="qav" src="assets/or-25.webp" alt="אור לוין" width="800" height="1200" loading="lazy" style="object-position:50% 20%">
+      <div class="saying">הבית שלך יכול להיראות כמו שתמיד רצית. ובפעם הבאה שמישהי תשאל מאיפה הפריט הזה, תוכלי להגיד <span class="hot nw">שיצרת אותו בעצמך.</span></div>
+      <p class="price-only">רק</p>
+      <span class="price-now grad-l">297 ש״ח</span>
+      <form class="buyform" id="buyform" novalidate data-demo data-heat-goal>
+        <div class="in-field">
+          <label for="buyemail">המייל שלך</label>
+          <input class="inp" type="email" id="buyemail" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com">
+        </div>
+        <button class="btn" type="submit">אני רוצה <span class="lock">להתחיל ליצור</span><svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <p class="thanks">מעולה. עוד רגע עוברים לתשלום.</p>
+      </form>
+      <p class="note">תשלום מאובטח בכרטיס אשראי.</p>
+      <img class="cards" src="assets/cards.png" alt="" width="1024" height="125" loading="lazy">
+    </div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <p>© גרציה | בית מלאכה</p>
+</footer>
+
+<div class="meter" data-heat aria-hidden="true"><div class="meter__body">
+  <svg class="meter__k" viewBox="0 0 24 24"><path d="M12 22c-4.4 0-7-2.7-7-6.3 0-4 3.6-5.9 4-10 2.3 1.4 3.6 3.6 3.6 5.4.9-.9 1.4-2.2 1.4-3.6 2.7 2.2 5 5 5 8.2 0 3.6-2.6 6.3-7 6.3z"/></svg>
+  <span class="meter__deg" data-heat-deg></span>
+  <span class="tube"><span class="fill"></span></span>
+  <img class="meter__av" src="assets/or-25.webp" alt="" width="360" height="360" style="object-position:50% 20%">
+</div></div>
+<div class="ambient" aria-hidden="true"></div>
+
+<script src="sam.js?v=1"></script>
+<script>
+(function(){var v=[].slice.call(document.querySelectorAll("video[data-src]"));if(!("IntersectionObserver" in window)){v.forEach(function(e){e.src=e.dataset.src;e.play&&e.play().catch(function(){})});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var el=e.target;if(e.isIntersecting){if(!el.src){el.src=el.dataset.src}var p=el.play();if(p&&p.catch)p.catch(function(){})}else if(el.src){el.pause()}})},{rootMargin:"200px 0px"});v.forEach(function(e){io.observe(e)})})();
+</script>
 </body>
 </html>

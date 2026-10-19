@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="560" viewBox="0 0 560 560" fill="none" stroke="#7B5A43" stroke-opacity=".075" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- heart -->
+  <path transform="translate(52 62) rotate(-12 20 18)" d="M20 34S2 23 2 12A9 9 0 0 1 20 8a9 9 0 0 1 18 4c0 11-18 22-18 22z"/>
+  <!-- play in a circle -->
+  <g transform="translate(300 40) rotate(8 22 22)"><circle cx="22" cy="22" r="20"/><path d="M17 13l13 9-13 9z"/></g>
+  <!-- target -->
+  <g transform="translate(470 150)"><circle cx="22" cy="22" r="20"/><circle cx="22" cy="22" r="11"/><circle cx="22" cy="22" r="2.5"/></g>
+  <!-- flame -->
+  <path transform="translate(170 210) rotate(-8 18 24)" d="M18 46c-9 0-15-6-15-14 0-9 8-13 9-22 5 3 8 8 8 12 2-2 3-5 3-8 6 5 10 11 10 18 0 8-6 14-15 14z"/>
+  <!-- lock -->
+  <g transform="translate(400 300) rotate(10 18 22)"><rect x="3" y="18" width="30" height="24" rx="6"/><path d="M10 18v-6a8 8 0 0 1 16 0v6"/></g>
+  <!-- sparkle -->
+  <path transform="translate(60 360)" d="M20 2c2 10 6 14 16 18-10 4-14 8-16 18-2-10-6-14-16-18 10-4 14-8 16-18z"/>
+  <!-- wave -->
+  <path transform="translate(240 420)" d="M2 20c6-12 12-12 18 0s12 12 18 0 12-12 18 0"/>
+  <!-- chat -->
+  <path transform="translate(470 470) rotate(-6 20 18)" d="M6 4h28a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H16l-9 7v-7H6a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z"/>
+  <!-- small circle -->
+  <circle cx="130" cy="500" r="12"/>
+  <circle cx="360" cy="190" r="7"/>
+</svg>
