@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-purchase>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>תודה | HOME-MADE</title>
+<!-- Meta Pixel, גרציה, 11.11.2026. רכישה נספרת פעם אחת, גם אם הדף מתרענן או נפתח שוב בשעתיים הקרובות -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','3137616436427101');
+fbq('track','PageView');
+(function(){
+  if (!document.documentElement.hasAttribute('data-purchase')) return;
+  try {
+    var last = +localStorage.getItem('hm_purchase') || 0;
+    if (Date.now() - last < 2 * 3600e3) return;
+    localStorage.setItem('hm_purchase', Date.now());
+  } catch (e) {}
+  fbq('track','Purchase',{value:297,currency:'ILS',content_name:'HOME-MADE'});
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* the thank-you page of HOME-MADE: the sand and terracotta of the landing page, one centered column */
+:root{
+  --ink:#3A1D20; --ink-2:#5C3E3A; --ink-3:#7A635A;
+  --sky:#B8742E; --blue:#8E3B26;
+  --paper:#FDF9F1; --sand:#F5ECDC;
+  --grad:linear-gradient(261deg,#6B2A33 0%,#B8742E 100%);
+  --grid-l:linear-gradient(rgba(58,29,32,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(58,29,32,.05) 1px,transparent 1px);
+  --font:"Rubik",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--sand);color:var(--ink);font-family:var(--font);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--blue)}
+.nw{white-space:nowrap}
+
+.thx{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 16px 40px;text-align:center;
+  background:radial-gradient(60% 46% at 50% 26%,rgb(184 116 46 / .22) 0%,transparent 70%),url(/decor.svg),var(--grid-l),var(--sand);
+  background-size:auto,560px 560px,56px 56px,56px 56px,auto}
+.thx__in{width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center}
+
+.thx__ph{position:relative;width:156px;height:156px;margin-bottom:30px}
+.thx__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;border-radius:50%;box-shadow:0 26px 50px -24px rgb(58 29 32 / .55),0 0 0 6px rgb(184 116 46 / .16)}
+.thx__ok{position:absolute;inset-inline-start:-2px;bottom:4px;width:46px;height:46px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -8px rgb(142 59 38 / .7)}
+.thx__ok svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+.thx h1{margin:0 0 14px;font-size:clamp(36px,6vw,58px);line-height:1.12;font-weight:900;color:var(--ink)}
+.thx__lead{margin:0;font-size:clamp(18px,2.2vw,21px);color:var(--ink-2)}
+
+.ig{margin-top:46px;width:100%;max-width:560px;padding:30px 26px 28px;border-radius:24px;background:var(--paper);border:1px solid rgb(184 116 46 / .24);box-shadow:0 30px 60px -36px rgb(58 29 32 / .45)}
+.ig h2{margin:0 0 8px;font-size:clamp(24px,3vw,30px);line-height:1.2;font-weight:800;color:var(--ink)}
+.ig p{margin:0;color:var(--ink-2)}
+.btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:22px;padding:18px 24px;border-radius:15px;background:var(--grad);color:#fff;font-size:19px;font-weight:800;line-height:1.25;text-decoration:none;box-shadow:0 0 18px 0 rgba(184,116,46,.55);transition:transform .2s,filter .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn svg{width:24px;height:24px;flex:none;fill:currentColor}
+.ig__handle{display:block;margin-top:12px;font-size:15px;font-weight:500;color:var(--ink-3)}
+
+.thx__brand{margin:54px 0 0;font-size:14px;color:var(--ink-3)}
+
+@media (max-width:480px){
+  .thx{padding-top:48px}
+  .thx__ph{width:132px;height:132px;margin-bottom:24px}
+  .ig{margin-top:36px;padding:26px 20px 24px}
+  .btn{font-size:18px;padding:17px 18px}
+}
+</style>
+</head>
+<body>
+<main class="thx">
+  <div class="thx__in">
+    <div class="thx__ph">
+      <img src="/toda/p-about.webp" alt="אור לוין" width="960" height="1200">
+      <span class="thx__ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+    </div>
+    <h1>תודה, <span class="grad nw">הרכישה התקבלה</span></h1>
+    <p class="thx__lead">ברוכה הבאה לתכנית <bdi>HOME-MADE</bdi>. <span class="nw">מכאן מתחילים ליצור.</span></p>
+
+    <section class="ig">
+      <h2>בואי נמשיך ביחד</h2>
+      <p>באינסטגרם של גרציה מחכות לך עוד יצירות והשראה מהבית מלאכה.</p>
+      <a class="btn" href="https://www.instagram.com/graziakmsh/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 5.68A4.16 4.16 0 1 0 16.16 12 4.16 4.16 0 0 0 12 7.84Zm0 6.86A2.7 2.7 0 1 1 14.7 12 2.7 2.7 0 0 1 12 14.7Zm5.3-7.03a.97.97 0 1 1-.97-.97.97.97 0 0 1 .97.97Z"/></svg>
+        <span>לאינסטגרם של גרציה</span>
+      </a>
+      <bdi class="ig__handle">@graziakmsh</bdi>
+    </section>
+  </div>
+  <p class="thx__brand">© גרציה | בית מלאכה</p>
+</main>
+</body>
+</html>
