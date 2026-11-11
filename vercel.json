@@ -3,7 +3,19 @@
   "headers": [
     {
       "source": "/(.*)\\.(html|css|js)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/home-made-grazia/:path*",
+      "destination": "https://home-made-grazia.vercel.app/:path*",
+      "permanent": false
     }
   ]
 }
